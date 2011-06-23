@@ -4,4 +4,8 @@ class Game < Gosu::Window
     super(width, height, fullscreen)
   end
 
+  def button_down(id)
+    self.close if id == Gosu::KbEscape
+  end
+
 end
