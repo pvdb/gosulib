@@ -12,10 +12,22 @@ speeds = (-5..5).to_a
 
 game = Game.new(640, 480, false)
 
+# 1.upto(1024) do
+#   point = game.add_point(rand(game.width), rand(game.height))
+#   point.extend(Moving)
+#   point.horizontal_speed = speeds[rand(speeds.size)]
+#   point.vertical_speed = speeds[rand(speeds.size)]
+# end
 1.upto(1024) do
-  point = game.add_point(rand(game.width), rand(game.height))
+  point = game.add_point(rand(game.width), rand(game.height), Gosu::Color::RED)
   point.extend(Moving)
   point.horizontal_speed = speeds[rand(speeds.size)]
+  # point.vertical_speed = speeds[rand(speeds.size)]
+end
+1.upto(1024) do
+  point = game.add_point(rand(game.width), rand(game.height), Gosu::Color::GREEN)
+  point.extend(Moving)
+  # point.horizontal_speed = speeds[rand(speeds.size)]
   point.vertical_speed = speeds[rand(speeds.size)]
 end
 
