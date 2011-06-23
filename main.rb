@@ -3,4 +3,9 @@
 require "rubygems"
 require "gosu"
 
-Gosu::Window.new(640, 480, false).show
+Dir.glob('**/*.rb').each do |file|
+  next if file == File.basename(__FILE__)
+  require File.basename(file, '.rb')
+end
+
+Game.new(640, 480, false).show
