@@ -5,7 +5,13 @@ require "gosu"
 
 Dir.glob('**/*.rb').each do |file|
   next if file == File.basename(__FILE__)
-  require File.basename(file, '.rb')
+  require file.gsub(/\.rb/, '')
 end
 
-Game.new(640, 480, false).show
+game = Game.new(640, 480, false)
+
+1.upto(1024) do
+  game.add_point(rand(game.width), rand(game.height))
+end
+
+game.show
