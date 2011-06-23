@@ -18,8 +18,8 @@ module Disappearing
     @age += 1
   end
   
-  def purge?
-    @age > @lifetime
+  def purge? window
+    (@age > @lifetime) || super(window)
   end
   
 end

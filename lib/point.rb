@@ -8,8 +8,8 @@ class Point
     @colour = colour
   end
 
-  def purge?
-    false
+  def purge? window
+    @x < 0 || @x >= window.width || @y < 0 || @y >= window.height
   end
 
   def update
