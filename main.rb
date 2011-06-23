@@ -11,7 +11,9 @@ end
 game = Game.new(640, 480, false)
 
 1.upto(1024) do
-  game.add_point(rand(game.width), rand(game.height))
+  point = game.add_point(rand(game.width), rand(game.height))
+  point.extend(Disappearing)
+  point.lifetime = rand(300)
 end
 
 game.show

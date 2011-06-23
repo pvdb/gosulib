@@ -6,10 +6,12 @@ class Game < Gosu::Window
   end
 
   def add_point(x, y, colour = Gosu::Color::WHITE)
-    @points << Point.new(x, y, colour)
+    @points << (point = Point.new(x, y, colour))
+    return point
   end
 
   def update
+    self.close if @points.empty?
     @points = @points.find_all { |point| !point.purge? }
     @points.each { |point| point.update  }
   end
