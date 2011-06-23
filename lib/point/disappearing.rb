@@ -13,7 +13,7 @@ module Disappearing
     @lifetime = lifetime
   end
   
-  def update
+  def update window
     super
     @age += 1
   end

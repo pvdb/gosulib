@@ -20,10 +20,10 @@ class Game < Gosu::Window
     self.close if @points.empty? && @lines.empty?
 
     @points = @points.find_all { |point| !point.purge? self }
-    @points.each { |point| point.update  }
+    @points.each { |point| point.update self  }
 
     @lines = @lines.find_all { |line| !line.purge? self }
-    @lines.each { |line| line.update  }
+    @lines.each { |line| line.update self  }
   end
 
   def draw

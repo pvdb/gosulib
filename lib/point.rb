@@ -12,11 +12,11 @@ class Point
     @x < 0 || @x >= window.width || @y < 0 || @y >= window.height
   end
 
-  def update
+  def update window
     # NOOP
   end
 
-  def draw(window)
+  def draw window
     window.draw_line(@x, @y, @colour, @x + 1, @y + 1, @colour)
   end
 

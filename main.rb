@@ -15,10 +15,12 @@ game = Game.new(640, 480, false)
 1.upto(128) do
   start_point = Point.new(rand(game.width), rand(game.height), Colour.random)
     start_point.extend(Moving)
+    start_point.extend(Bouncing)
     start_point.horizontal_speed = speeds[rand(speeds.size)]
     start_point.vertical_speed = speeds[rand(speeds.size)]
   end_point = Point.new(rand(game.width), rand(game.height), Colour.random)
     end_point.extend(Moving)
+    end_point.extend(Bouncing)
     end_point.horizontal_speed = speeds[rand(speeds.size)]
     end_point.vertical_speed = speeds[rand(speeds.size)]
   game.add_line start_point, end_point

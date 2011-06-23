@@ -9,9 +9,9 @@ class Line
     @start_point.purge?(window) && @end_point.purge?(window)
   end
 
-  def update
-    @start_point.update
-    @end_point.update
+  def update window
+    @start_point.update window
+    @end_point.update window
   end
   
   def draw window
