@@ -8,7 +8,7 @@ class Game < Gosu::Window
   def button_down(id)
     self.close if id == Gosu::KbEscape
   end
-  
+
   def draw
     @text.draw("Press 'esc' to end the game...", 10, 10, 0)
   end
@@ -16,9 +16,11 @@ class Game < Gosu::Window
 end
 
 class PointGame < Game
-  
-  def initialize(width, height, fullscreen)
+
+  def initialize(width, height, fullscreen, number_of_points, &create_point)
     super(width, height, fullscreen)
+    @number_of_points = number_of_points
+    @create_point = create_point
     @points = []
   end
 
@@ -26,25 +28,38 @@ class PointGame < Game
     @points << (point = Point.new(x, y, colour))
     return point
   end
-  
+
   def update
+
+    # STEP 1: purge stale points
+    @points = @points.find_all { |point| !point.purge? self }
+
+    # STEP 2: add new points
+    while @points.size < @number_of_points
+      @create_point.call(self)
+    end
+
+    # STEP 3: close game if no more points
     self.close if @points.empty?
 
-    @points = @points.find_all { |point| !point.purge? self }
+    # STEP 4: update each point
     @points.each { |point| point.update self  }
+
   end
 
   def draw
     @text.draw("Points: " + @points.size.to_s, 10, 10, 0)
     @points.each { |point| point.draw(self)  }
   end
-  
+
 end
 
 class LineGame < Game
-  
-  def initialize(width, height, fullscreen)
+
+  def initialize(width, height, fullscreen, number_of_lines, &create_line)
     super(width, height, fullscreen)
+    @number_of_lines = number_of_lines
+    @create_line = create_line
     @lines = []
   end
 
@@ -54,15 +69,26 @@ class LineGame < Game
   end
 
   def update
+
+    # STEP 1: purge stale lines
+    @lines = @lines.find_all { |line| !line.purge? self }
+
+    # STEP 2: add new lines
+    while @lines.size < @number_of_lines
+      @create_line.call(self)
+    end
+
+    # STEP 3: close game if no more lines
     self.close if @lines.empty?
 
-    @lines = @lines.find_all { |line| !line.purge? self }
+    # STEP 4: update each line
     @lines.each { |line| line.update self  }
+
   end
 
   def draw
     @text.draw("Lines: " + @lines.size.to_s, 10, 10, 0)
     @lines.each { |line| line.draw(self)  }
   end
-  
+
 end
