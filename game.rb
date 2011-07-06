@@ -16,10 +16,16 @@ class Game < Gosu::Window
 
   def draw
     banner = [
-      "Press 'esc' to end the game...",
-      "Age of game (number of ticks): #{commified_age}"
-    ].join(' | ')
+      "Press 'esc' to quit",
+      self.game_stats
+    ].flatten.join(' | ')
     @text.draw(banner, 10, self.height - 40, 0)
+  end
+
+  protected
+
+  def game_stats
+    ["Age of game (number of ticks): #{commified_age}"]
   end
 
   private
@@ -46,6 +52,8 @@ class PointGame < Game
 
   def update
 
+    super
+
     # STEP 1: purge stale points
     @points = @points.find_all { |point| !point.purge? self }
 
@@ -63,8 +71,12 @@ class PointGame < Game
   end
 
   def draw
-    @text.draw("Points: " + @points.size.to_s, 10, 10, 0)
+    super
     @points.each { |point| point.draw(self)  }
+  end
+
+  def game_stats
+    super << ("Points: %s" % @points.size)
   end
 
 end
@@ -85,6 +97,8 @@ class LineGame < Game
 
   def update
 
+    super
+
     # STEP 1: purge stale lines
     @lines = @lines.find_all { |line| !line.purge? self }
 
@@ -102,8 +116,12 @@ class LineGame < Game
   end
 
   def draw
-    @text.draw("Lines: " + @lines.size.to_s, 10, 10, 0)
+    super
     @lines.each { |line| line.draw(self)  }
+  end
+
+  def game_stats
+    super << ("Lines: %s" % @lines.size)
   end
 
 end
