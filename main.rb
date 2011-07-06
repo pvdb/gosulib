@@ -32,13 +32,15 @@ answer = 0 ; until answer >= 1 && answer <= all_games.size
   answer = STDIN.gets.chomp.to_i
 end
 
+caption = ""
+
 # STEP 4: load the selected game
 unless answer.nil?
-  require all_games[answer - 1]
+  game = all_games[answer - 1]
+  require game
+  caption = File.basename(game, '.rb').gsub(/_/, ' ')
 end
 
 game = ($GAME_CLASS || Game).new(640, 480, false)
-# game = PointGame.new(640, 480, false, 0)
-
-
+game.caption = caption
 game.show
