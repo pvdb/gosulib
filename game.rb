@@ -2,15 +2,30 @@ class Game < Gosu::Window
 
   def initialize(width, height, fullscreen)
     super(width, height, fullscreen)
-    @text = Gosu::Font.new(self, 'Monaco', 24)
+    @age = 0
+    @text = Gosu::Font.new(self, 'Courier New', 18)
   end
 
   def button_down(id)
     self.close if id == Gosu::KbEscape
   end
 
+  def update
+    @age += 1
+  end
+
   def draw
-    @text.draw("Press 'esc' to end the game...", 10, 10, 0)
+    banner = [
+      "Press 'esc' to end the game...",
+      "Age of game (number of ticks): #{commified_age}"
+    ].join(' | ')
+    @text.draw(banner, 10, self.height - 40, 0)
+  end
+
+  private
+
+  def commified_age
+    @age.to_s.gsub(/(\d)(?=(\d{3})+$)/,'\1,')
   end
 
 end
