@@ -2,7 +2,7 @@ class Point
 
   attr_accessor :x, :y, :colour
 
-  def initialize(x, y, colour)
+  def initialize(x, y, colour = Gosu::Color::WHITE)
     @x = x
     @y = y
     @colour = colour
