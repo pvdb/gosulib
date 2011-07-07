@@ -54,19 +54,19 @@ class PointGame < Game
 
     super
 
-    # STEP 1: purge stale points
+    # STEP 1: update each point
+    @points.each { |point| point.update self  }
+
+    # STEP 2: purge stale points
     @points = @points.find_all { |point| !point.purge? self }
 
-    # STEP 2: add new points
+    # STEP 3: add new points
     while @points.size < @number_of_points
       @create_point.call(self)
     end
 
-    # STEP 3: close game if no more points
+    # STEP 4: close game if no more points
     self.close if @points.empty?
-
-    # STEP 4: update each point
-    @points.each { |point| point.update self  }
 
   end
 
