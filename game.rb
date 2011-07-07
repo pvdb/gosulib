@@ -4,6 +4,7 @@ class Game < Gosu::Window
     super(width, height, fullscreen)
     @age = 0
     @text = Gosu::Font.new(self, 'Courier New', 18)
+    @beep = Gosu::Sample.new(self, "media/Beep.wav")
   end
 
   def button_down(id)
@@ -47,6 +48,7 @@ class PointGame < Game
 
   def add_point(x, y, colour = Gosu::Color::WHITE)
     @points << (point = Point.new(x, y, colour))
+    # @beep.play
     return point
   end
 
