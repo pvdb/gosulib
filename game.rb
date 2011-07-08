@@ -43,12 +43,12 @@ class PointGame < Game
     super(width, height, fullscreen)
     @number_of_points = number_of_points
     @create_point = create_point
-    @points = []
+    @points = [] ; @point_count = 0
   end
 
   def add_point(x, y, colour = Gosu::Color::WHITE)
+    @point_count += 1 # all points ever created
     @points << (point = Point.new(x, y, colour))
-    # @beep.play
     return point
   end
 
