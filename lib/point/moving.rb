@@ -5,6 +5,14 @@ module Moving
     object.instance_variable_set(:@vertical_speed, 0)
   end
 
+  def next_x # deterministic
+    @x + @horizontal_speed
+  end
+
+  def next_y # deterministic
+    @y + @vertical_speed
+  end
+
   def horizontal_speed
     @horizontal_speed
   end
