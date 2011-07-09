@@ -3,10 +3,9 @@ class FallingSnow < PointGame
   def initialize(width, height, fullscreen)
 
     super(width, height, fullscreen, width / 8) do |game|
-      point = game.add_point(rand(width), 0)
+      point = game.add_point(rand(width), rand(8))
       point.extend(Moving)
-      # point.horizontal_speed = Speed.random(-5, 5)
-      point.vertical_speed = 2 + Speed.random(-1, 1)
+      point.vertical_speed = Speed.random(1, 4)
     end
 
     @lines = (0..width - 1).map { |x|
